@@ -1,8 +1,8 @@
 # Estructura de Datos y Algoritmos Fundamentales
 ### TC1031 - Gpo 603
 ### Nombre: 
-## Escribe tu nombre
+## David Alejandro Lozano Arreola
 ### Matrícula: 
-## Escribe tu matrícula
+## A01722728
 ### Carrera: 
-## Escribe las iniciales de tu carrera
+## ITC
