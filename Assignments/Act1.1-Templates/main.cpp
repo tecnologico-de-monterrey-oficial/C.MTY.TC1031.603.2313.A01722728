@@ -6,7 +6,11 @@ using namespace std;
 
 int main(){
     List<int> list;
-    list.removeLast();
+    try{
+       list.removeLast(); 
+    }catch(out_of_range& e){
+        cout << e.what() << endl;
+    }
     list.insert(3);
     list.insert(4);
     list.insert(10);

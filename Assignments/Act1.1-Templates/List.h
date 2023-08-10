@@ -36,12 +36,12 @@ void List<T>::insert(T elem){
 
 template <class T>
 void List<T>::removeLast(){
-    if(size == 0){
-        cout << "No hay elementos" << endl;
-    }else{
+    if(size > 0){
         cout << "Last element removed: " << data[size-1] << endl;
         data.pop_back();
         size --;
+    }else{
+        throw out_of_range("Empty list");
     }
 }
 
@@ -55,19 +55,24 @@ T List<T>::getData(int pos){
     if(pos >=0 && pos<size){
         return data[pos];
     }else{
-        return 0;
+        throw out_of_range("Index out of range");
     }
 }
 
 template <class T>
 T List<T>::getMax(){
-    T max = 0;
-    for(T x:data){
-        if(x>max){
-            max = x;
+    if(size>0){
+        T max = data[0];
+        for(int i=1; i< size; i++){
+            if(data[i]>max){
+                max = data[i];
+            }
         }
+        return max;
+    }else{
+        throw out_of_range("Empty list");
     }
-    return max;
+    
 }
 
 
