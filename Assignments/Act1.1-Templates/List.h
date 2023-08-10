@@ -1,12 +1,6 @@
 #ifndef Lista_h
 #define Lista_h
 
-//Borrar 
-#include <iostream>
-#include <vector>
-using namespace std;
-//Borrar
-
 template <class T>
 class List{
     private:
