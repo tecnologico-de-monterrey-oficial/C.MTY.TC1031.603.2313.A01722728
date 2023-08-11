@@ -1,6 +1,10 @@
 #ifndef Lista_h
 #define Lista_h
 
+#include <iostream>
+#include <vector>
+using namespace std;
+
 template <class T>
 class List{
     private:

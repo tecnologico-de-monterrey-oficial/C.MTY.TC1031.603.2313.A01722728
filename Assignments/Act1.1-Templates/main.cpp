@@ -6,6 +6,13 @@ using namespace std;
 
 int main(){
     List<int> list;
+
+    try{
+        cout << "Max value: " << list.getMax() << endl;
+    }catch(out_of_range& e){
+        cout << e.what() << endl;
+    }
+
     try{
        list.removeLast(); 
     }catch(out_of_range& e){
@@ -20,8 +27,27 @@ int main(){
 
     list.print();
     cout << "Size: " << list.getSize() << endl;
-    cout << "Max value: " << list.getMax() << endl; 
-    cout << "Value at index [1]: " << list.getData(1) << endl;
+
+    try{
+        cout << "Max value: " << list.getMax() << endl;
+    }catch(out_of_range& e){
+        cout << e.what() << endl;
+    }
+
+    try{
+        cout << "Value at index [1]: " << list.getData(1) << endl;
+    }catch(out_of_range& e){
+        cout << e.what() << endl;
+    }
+
+    try{
+        cout << "Value at index [-1]: " << list.getData(-1) << endl;
+    }catch(out_of_range& e){
+        cout << e.what() << endl;
+    }
+    
+     
+    
 
     return 0;
 }
