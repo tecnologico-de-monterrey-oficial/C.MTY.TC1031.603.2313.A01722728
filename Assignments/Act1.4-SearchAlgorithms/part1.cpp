@@ -16,7 +16,7 @@ int linearSearch(vector<int> arr, int data){
     return -1;
 }
 
-int binarySearch(vector<int> arr, int data, int left, int right){
+int binarySearchRecursive(vector<int> arr, int data, int left, int right){
     int mid = left + (right-left)/2;
     if(left > right){
         return -1;
@@ -26,12 +26,32 @@ int binarySearch(vector<int> arr, int data, int left, int right){
     }
     else if(data < arr[mid]){
         right = mid-1;
-        return binarySearch(arr, data, left, right);
+        return binarySearchRecursive(arr, data, left, right);
     }
     else{
         left = mid+1;
-        return binarySearch(arr, data, left, right);
+        return binarySearchRecursive(arr, data, left, right);
     }
+}
+
+int binarySearchWhile(vector<int> arr, int data){
+    int left = 0;
+    int right = arr.size() - 1;
+    
+    while(left <= right){
+        int mid = left + (right-left)/2;
+        if(arr[mid]==data){
+        return mid;
+        }
+        else if(data < arr[mid]){
+            right = mid-1;
+        }
+        else{
+            left = mid+1;
+        }
+    }
+    return -1;
+    
 }
 
 int main(){
@@ -52,7 +72,10 @@ int main(){
         cout << "Input int (between 1-1,000,000) to find position in list or 0 to terminate: " << endl;
         cin >> command;
         startTime(begin);
-        cout << "Index using binary search (Recursive): " << binarySearch(list, command, 0, list.size()-1) << endl;
+        cout << "Index using binary search (Recursive): " << binarySearchRecursive(list, command, 0, list.size()-1) << endl;
+        getTime(begin, end);
+        startTime(begin);
+        cout << "Index using binary search (While): " << binarySearchWhile(list, command) << endl;
         getTime(begin, end);
         startTime(begin);
         cout << "Index using linear search: " << linearSearch(list, command) << endl;
