@@ -78,13 +78,16 @@ void selectionSort(vector<T> &list, int &comparisons, int &swaps){
 template <class T>
 void insertionSort(vector<T> &list, int &comparisons, int &swaps){
     for(int i=1; i<list.size(); i++){
-        int key = i;
         int j = i-1;
-        while(j>=0 && list[key] < list[j]){
+        while(j>=0){
             comparisons++;
-            swap(list, key, j);
-            swaps++;
-            key = j;
+            if(list[j+1] < list[j]){
+                swap(list, j+1, j);
+                swaps++;
+            }else{
+                j= -1;
+            }
+            
             j--;
         }
     }
