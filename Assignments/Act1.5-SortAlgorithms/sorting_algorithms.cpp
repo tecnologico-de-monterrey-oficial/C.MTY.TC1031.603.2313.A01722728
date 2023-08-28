@@ -60,12 +60,34 @@ void bubbleSort(vector<T> &list, int &comparisons, int &swaps){
 
 template <class T>
 void selectionSort(vector<T> &list, int &comparisons, int &swaps){
-    
+    for(int i=0; i<list.size()-1; i++){
+        int min = i;
+        for(int j=i+1; j<list.size(); j++){
+            comparisons++;
+            if(list[j]<list[min]){
+                min = j;
+            }
+        }
+        if(min!=i){
+            swap(list, i, min);
+            swaps++;
+        }   
+    }
 }
 
 template <class T>
 void insertionSort(vector<T> &list, int &comparisons, int &swaps){
-    
+    for(int i=1; i<list.size(); i++){
+        int key = i;
+        int j = i-1;
+        while(j>=0 && list[key] < list[j]){
+            comparisons++;
+            swap(list, key, j);
+            swaps++;
+            key = j;
+            j--;
+        }
+    }
 }
 
 template <class T>
@@ -78,9 +100,14 @@ void quickSort(vector<T> &list, int &comparisons, int &swaps){
     
 }
 
+template <class T>
+void shellSort(vector<T> &list, int &comparisons, int &swaps){
+    
+}
+
 
 int main(){
-    vector<int> list{5,7,2,1,4,5,7,8,9};
+    vector<int> list{15,7,3,9,12,5,2};
     print(list);
 
     vector<int> listAux = list;    
@@ -94,6 +121,20 @@ int main(){
     comparisons = 0;
     swaps = 0;
     bubbleSort(listAux, comparisons, swaps);
+    print(listAux);
+    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
+
+    listAux = list;    
+    comparisons = 0;
+    swaps = 0;
+    selectionSort(listAux, comparisons, swaps);
+    print(listAux);
+    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
+
+    listAux = list;    
+    comparisons = 0;
+    swaps = 0;
+    insertionSort(listAux, comparisons, swaps);
     print(listAux);
     cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
 
