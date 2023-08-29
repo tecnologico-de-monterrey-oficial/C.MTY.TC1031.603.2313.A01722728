@@ -105,9 +105,21 @@ void quickSort(vector<T> &list, int &comparisons, int &swaps){
 
 template <class T>
 void shellSort(vector<T> &list, int &comparisons, int &swaps){
-    
+    int n = list.size();
+    for (int gap = n/2; gap > 0; gap /= 2){
+        for (int i = gap; i < n; i += 1){
+            int temp = list[i];
+            int j;            
+            for (j = i; j >= gap && list[j - gap] > temp; j -= gap){
+                list[j] = list[j - gap];
+                comparisons++;
+                swaps++;
+            }
+            list[j] = temp;
+            swaps++;
+        }
+    }
 }
-
 
 int main(){
     vector<int> list{15,7,3,9,12,5,2};
