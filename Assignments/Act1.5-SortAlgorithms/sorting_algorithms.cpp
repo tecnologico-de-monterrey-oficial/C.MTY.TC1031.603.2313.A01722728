@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 // Función para imprimir los valores de la lista
@@ -93,9 +94,69 @@ void insertionSort(vector<T> &list, int &comparisons, int &swaps){
     }
 }
 
+template<class T>
+void merge(vector<T> &list, int left, int mid, int right) {
+    // Creamos la lista del lado izquierdo (left -> mid)
+    vector<T> leftList;
+    for (int i=left; i<=mid; i++) {
+        leftList.push_back(list[i]);
+    }
+    // Creamos la lista del lado derecho (mid+1 -> right)
+    vector<T> rightList;
+    for (int j=mid+1; j<=right; j++) {
+        rightList.push_back(list[j]);
+    }
+    // Creamos un índice auxiliar igual a left
+    int auxIndex = left;
+    // Creamos dos índices auxliares uno para cada lista
+    int leftIndex = 0;
+    int rightIndex = 0;
+    // Iteramos mientras haya elementos por comparar en las dos listas
+    while (leftIndex < leftList.size() && rightIndex < rightList.size()) {
+        // Comparamos el valor en el índice izquierdo de la lista izquierda 
+        // con el valor en el índice derecho de la lista derecha
+        if (leftList[leftIndex] < rightList[rightIndex]) {
+            // El valor del lado izquierdo es menor
+            list[auxIndex] = leftList[leftIndex];
+            // Incrementamos el índice izquierdo
+            leftIndex++;
+        } else {
+            // El valor del lado derecho es menor
+            list[auxIndex] = rightList[rightIndex];
+            // Incrementamos el índice derecho
+            rightIndex++;
+        }
+        // Incrementamos el auxIndex
+        auxIndex++;
+    }
+    // Vaciar los elementos pendientes de la izquierda 
+    while (leftIndex < leftList.size()) {
+        // El valor del lado izquierdo es menor
+        list[auxIndex] = leftList[leftIndex];
+        // Incrementamos el índice izquierdo
+        leftIndex++;
+        // Incrementamos el auxIndex
+        auxIndex++;
+    }
+    // Vaciar los elementos pendientes de la derecha
+    while (rightIndex < rightList.size()) {
+        // El valor del lado derecho es menor
+        list[auxIndex] = rightList[rightIndex];
+        // Incrementamos el índice derecho
+        rightIndex++;
+        // Incrementamos el auxIndex
+        auxIndex++;
+    }
+}
+
 template <class T>
-void mergeSort(vector<T> &list, int &comparisons, int &swaps){
-    
+void mergeSort(vector<T> &list, int left, int right){
+    if(left<right){
+        int mid = floor(left + (left+right)/2);
+        mergeSort(list, left, mid);
+        mergeSort(list, mid+1, right);
+        merge(list, left, mid, right);
+    }
 }
 
 template <class T>
