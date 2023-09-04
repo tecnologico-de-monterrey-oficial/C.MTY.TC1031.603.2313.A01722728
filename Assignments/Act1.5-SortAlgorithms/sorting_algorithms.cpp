@@ -3,6 +3,16 @@
 #include <cmath>
 using namespace std;
 
+// Crea una lista aleatoria de enteros
+void createListInt(vector<int> &list, int quantity)
+{
+  for (int i = 0; i < quantity; i++)
+  {
+    int num = rand() % 100 + 1;
+    list.push_back(num);
+  }
+}
+
 // Función para imprimir los valores de la lista
 template <class T>
 void print(vector<T> list)
@@ -160,30 +170,37 @@ void mergeSort(vector<T> &list, int left, int right){
 }
 
 template <class T>
-void quickSort(vector<T> &list, int &comparisons, int &swaps){
-    
+int getPivot(vector<T> &list, int left, int right){
+    int aux = -1;
+    int pivot = right;
+    for(int i=0; i<list.size()-1; i++){
+        if(list[i]<list[pivot]){
+            aux++;
+            swap(list, i, aux);
+        }
+    }
+    aux++;
+    swap(list, pivot, aux);
+    pivot = aux;
+    return pivot;
+}
+
+template <class T>
+void quickSort(vector<T> &list, int left, int right){
+    if(left<right){
+        int pivot = getPivot(list, left, right);
+        quickSort(list, left, pivot-1);
+        quickSort(list, pivot+1, right);
+    }   
 }
 
 template <class T>
 void shellSort(vector<T> &list, int &comparisons, int &swaps){
-    int n = list.size();
-    for (int gap = n/2; gap > 0; gap /= 2){
-        for (int i = gap; i < n; i += 1){
-            int temp = list[i];
-            int j;            
-            for (j = i; j >= gap && list[j - gap] > temp; j -= gap){
-                list[j] = list[j - gap];
-                comparisons++;
-                swaps++;
-            }
-            list[j] = temp;
-            swaps++;
-        }
-    }
+    
 }
 
 int main(){
-    vector<int> list{15,7,3,9,12,5,2};
+    vector<int> list{15,7,3,9,12,5,2,11};
     print(list);
 
     vector<int> listAux = list;    
@@ -213,6 +230,14 @@ int main(){
     insertionSort(listAux, comparisons, swaps);
     print(listAux);
     cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
+
+    listAux = list;    
+    quickSort(listAux, 0, listAux.size()-1);
+    cout << "Quicksort: ";
+    print(listAux);
+    
+    
+
 
     return 0;
 }

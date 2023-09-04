@@ -37,7 +37,7 @@ int main() {
         // Incrementamos el contador de registros
         cont++;
     }
-
+    cout << "La cantidad de registros es: " << cont << endl;
 
     return 0;
 }
