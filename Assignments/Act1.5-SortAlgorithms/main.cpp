@@ -31,22 +31,10 @@ void print_comparisons_swaps(int comp, int swap){
 int main(){
     // Semilla para generar números aleatorios
     srand(time(0));
-
+    
     vector<int> list;
     createList(list, 100);
-    
-
-    /*char list_type;
-    cout << "List data type: Double/Int/Long (d/i/l)";
-    cin >> list_type;
-    if(list_type=='d'){
-        vector<double> list; 
-    }else if(list_type=='i'){
-       
-    }else if(list_type=='l'){
-        
-    }*/
-    
+     
     vector<string> algorithm_names {"swap sort", "bubble sort",  "selection sort", "insertion sort", "merge sort", "quick sort", "shell sort"};
     for(int i=0; i<algorithm_names.size(); i++){
         cout << i << " - " << algorithm_names[i] << endl;
