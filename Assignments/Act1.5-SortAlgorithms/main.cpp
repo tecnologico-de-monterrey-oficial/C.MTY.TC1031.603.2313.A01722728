@@ -24,18 +24,83 @@ void findNum(vector<T> &list){
     }
 }
 
+void print_comparisons_swaps(int comp, int swap){
+    cout << "Comparisons: " << comp << " Swaps: " << swap << endl;
+}
+
 int main(){
     // Semilla para generar números aleatorios
     srand(time(0));
-    
+
     vector<int> list;
-    createList(list, 100); 
+    createList(list, 100);
+    
+
+    /*char list_type;
+    cout << "List data type: Double/Int/Long (d/i/l)";
+    cin >> list_type;
+    if(list_type=='d'){
+        vector<double> list; 
+    }else if(list_type=='i'){
+       
+    }else if(list_type=='l'){
+        
+    }*/
+    
+    vector<string> algorithm_names {"swap sort", "bubble sort",  "selection sort", "insertion sort", "merge sort", "quick sort", "shell sort"};
+    for(int i=0; i<algorithm_names.size(); i++){
+        cout << i << " - " << algorithm_names[i] << endl;
+    }
+
+    int algorithm_index;
+    cout << "Input index of the sorting algorithm: " << endl;
+    cin >> algorithm_index;
+
     int comparisons = 0;
     int swaps = 0;
-    shellSort(list, comparisons, swaps);
-    print(list);
-    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
 
+    if(algorithm_index==0){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        swapSort(list, comparisons, swaps);
+        print(list);
+        print_comparisons_swaps(comparisons, swaps);
+
+    }else if(algorithm_index==1){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        bubbleSort(list, comparisons, swaps);
+        print(list);
+        print_comparisons_swaps(comparisons, swaps);
+
+    }else if(algorithm_index==2){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        selectionSort(list, comparisons, swaps);
+        print(list);
+        print_comparisons_swaps(comparisons, swaps);
+
+    }else if(algorithm_index==3){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        insertionSort(list, comparisons, swaps);
+        print(list);
+        print_comparisons_swaps(comparisons, swaps);
+
+    }else if(algorithm_index==4){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        mergeSort(list, 0, list.size()-1);
+        print(list);
+        
+
+    }else if(algorithm_index==5){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        quickSort(list, 0, list.size()-1);
+        print(list);
+        
+    }else if(algorithm_index==6){
+        cout << algorithm_names[algorithm_index] << ": " << endl;
+        shellSort(list, comparisons, swaps);
+        print(list);
+        print_comparisons_swaps(comparisons, swaps);
+
+    }
     findNum(list);
 
     return 0;
