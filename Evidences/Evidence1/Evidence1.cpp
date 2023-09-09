@@ -4,6 +4,8 @@
 #include <sstream>
 using namespace std;
 
+#include "Log.h"
+
 int main() {
 
     // Archivo de entrada
@@ -21,6 +23,7 @@ int main() {
     string time;
     string ip;
     string message;
+    vector<Log> logs;
     // Variable auxiliar para guardar el contador de registros
     int cont = 0;
     // Ciclo para leer todo los renglones del archivo de entrada
@@ -33,11 +36,13 @@ int main() {
         while (ss >> word) {
             message = message + " " + word;
         }
-        cout << month << " " << day << " " << year << " " << time << " " << ip << " " << message << endl;
+        // cout << month << " " << day << " " << year << " " << time << " " << ip << " " << message << endl;
+        Log log(year, month, day, time, ip, message);
+        logs.push_back(log);
         // Incrementamos el contador de registros
         cont++;
     }
-    cout << "La cantidad de registros es: " << cont << endl;
+    cout << "La cantidad de registros es: " << logs[0].year << endl;
 
     return 0;
 }

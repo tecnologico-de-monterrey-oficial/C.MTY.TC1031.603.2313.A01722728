@@ -33,7 +33,10 @@ int main(){
     srand(time(0));
     
     vector<int> list;
-    createList(list, 100);
+    int n = 0;
+    cout << "Input amount of values: ";
+    cin >> n;
+    createList(list, n);
      
     vector<string> algorithm_names {"swap sort", "bubble sort",  "selection sort", "insertion sort", "merge sort", "quick sort", "shell sort"};
     for(int i=0; i<algorithm_names.size(); i++){

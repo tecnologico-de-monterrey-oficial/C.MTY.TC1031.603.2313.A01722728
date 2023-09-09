@@ -26,7 +26,7 @@ void createList(vector<T> &list, int quantity)
 {
   for (int i = 0; i < quantity; i++)
   {
-    T num = rand() % 10000 + 1;
+    T num = rand() % 1000000 + 1;
     list.push_back(num);
   }
 }
