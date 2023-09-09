@@ -1,16 +1,41 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <cmath>
+#include "timer.cpp"
+
 using namespace std;
 
-// Crea una lista aleatoria de enteros
-void createListInt(vector<int> &list, int quantity)
-{
-  for (int i = 0; i < quantity; i++)
-  {
-    int num = rand() % 100 + 1;
-    list.push_back(num);
-  }
+template <class T>
+int linearSearch(vector<T> arr, T data){
+    int n = arr.size();
+    for(int i=0; i<n; i++){
+        if(arr[i]==data){
+            return i;
+        }
+    }
+    return -1;
+}
+
+template <class T>
+int binarySearch(vector<T> arr, T data){
+    int left = 0;
+    int right = arr.size() - 1;
+    
+    while(left <= right){
+        int mid = left + (right-left)/2;
+        if(arr[mid]==data){
+        return mid;
+        }
+        else if(data < arr[mid]){
+            right = mid-1;
+        }
+        else{
+            left = mid+1;
+        }
+    }
+    return -1;
+    
 }
 
 // Función para imprimir los valores de la lista
@@ -28,7 +53,7 @@ template <class T>
 void swap(vector<T> &list, int a, int b)
 {
     // validamos que sean diferentes
-    if (list[a] != list[b])
+    if (a!=b)
     {
         T aux = list[a];
         list[a] = list[b];
@@ -171,9 +196,9 @@ void mergeSort(vector<T> &list, int left, int right){
 
 template <class T>
 int getPivot(vector<T> &list, int left, int right){
-    int aux = -1;
+    int aux = left-1;
     int pivot = right;
-    for(int i=0; i<list.size()-1; i++){
+    for(int i=left; i<right; i++){
         if(list[i]<list[pivot]){
             aux++;
             swap(list, i, aux);
@@ -181,8 +206,7 @@ int getPivot(vector<T> &list, int left, int right){
     }
     aux++;
     swap(list, pivot, aux);
-    pivot = aux;
-    return pivot;
+    return aux;
 }
 
 template <class T>
@@ -196,48 +220,19 @@ void quickSort(vector<T> &list, int left, int right){
 
 template <class T>
 void shellSort(vector<T> &list, int &comparisons, int &swaps){
-    
+    int n = list.size();
+    for (int gap = n/2; gap > 0; gap /= 2){
+        for (int i = gap; i < n; i += 1){
+            int temp = list[i];
+            int j;            
+            for (j = i; j >= gap && list[j - gap] > temp; j -= gap){
+                list[j] = list[j - gap];
+                comparisons++;
+                swaps++;
+            }
+            list[j] = temp;
+            swaps++;
+        }
+    }
 }
 
-int main(){
-    vector<int> list{15,7,3,9,12,5,2,11};
-    print(list);
-
-    vector<int> listAux = list;    
-    int comparisons = 0;
-    int swaps = 0;
-    swapSort(listAux, comparisons, swaps);
-    print(listAux);
-    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
-
-    listAux = list;    
-    comparisons = 0;
-    swaps = 0;
-    bubbleSort(listAux, comparisons, swaps);
-    print(listAux);
-    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
-
-    listAux = list;    
-    comparisons = 0;
-    swaps = 0;
-    selectionSort(listAux, comparisons, swaps);
-    print(listAux);
-    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
-
-    listAux = list;    
-    comparisons = 0;
-    swaps = 0;
-    insertionSort(listAux, comparisons, swaps);
-    print(listAux);
-    cout << "Comparisons: " << comparisons << " Swaps: " << swaps << endl;
-
-    listAux = list;    
-    quickSort(listAux, 0, listAux.size()-1);
-    cout << "Quicksort: ";
-    print(listAux);
-    
-    
-
-
-    return 0;
-}
