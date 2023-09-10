@@ -6,9 +6,9 @@
 using namespace std;
 
 template <class T>
-int binarySearchRecursive(vector<T> arr, int data, int left, int right){
+int binarySearchRecursive(vector<T> arr, T data, int left, int right){
     int mid = left + (right-left)/2;
-    if(left > right){
+    if(right < left){
         return -1;
     }
     if(arr[mid]==data){

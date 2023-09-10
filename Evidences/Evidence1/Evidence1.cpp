@@ -46,11 +46,14 @@ int main() {
     cout << "La cantidad de registros es: " << logs.size() << endl;
     // Quicksort para ordenar el vector logs
     quickSort(logs, 0, logs.size()-1);
-    // Ciclo para escribir los registros ordenados en el archivo de salida
+    // Escribiendo los registros ordenados en el archivo de salida
     for (int i = 0; i < logs.size(); i++) {
         fileOut << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
     }
-    // Cerramos el archivo de entrada   
+
+
+    // Cerramos los archivos de entrada y salida
+    fileOut.close(); 
     fileIn.close();
 
     return 0;
