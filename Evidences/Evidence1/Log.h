@@ -9,6 +9,8 @@ struct Log {
     string message;
     string key;
     bool operator<(Log log);
+    string keyGenerator();
+    void print();
 
     Log(string year, string month, string day, string time, string ip, string message);
 };
@@ -21,7 +23,17 @@ Log::Log(string year, string month, string day, string time, string ip, string m
     this->ip = ip;
     this->message = message;
     // Generar la clave 
-    // key = keyGenerator()
+    key = keyGenerator();
+}
+
+string Log::keyGenerator() {
+    string key = "";
+    key = key + year + month + day + time;
+    return key;
+}
+
+void Log::print(){
+    cout << year << " " << month << " " << day << " " << time << " " << ip << " " << message << endl;
 }
 
 bool Log::operator<(Log log) {

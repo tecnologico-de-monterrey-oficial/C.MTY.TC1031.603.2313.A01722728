@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "algorithms.cpp"
 using namespace std;
 
 #include "Log.h"
@@ -36,13 +37,21 @@ int main() {
         while (ss >> word) {
             message = message + " " + word;
         }
-        // cout << month << " " << day << " " << year << " " << time << " " << ip << " " << message << endl;
         Log log(year, month, day, time, ip, message);
         logs.push_back(log);
         // Incrementamos el contador de registros
         cont++;
     }
-    cout << "La cantidad de registros es: " << logs[0].year << endl;
+
+    cout << "La cantidad de registros es: " << logs.size() << endl;
+    // Quicksort para ordenar el vector logs
+    quickSort(logs, 0, logs.size()-1);
+    // Ciclo para escribir los registros ordenados en el archivo de salida
+    for (int i = 0; i < logs.size(); i++) {
+        fileOut << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+    }
+    // Cerramos el archivo de entrada   
+    fileIn.close();
 
     return 0;
 }
