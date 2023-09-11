@@ -69,8 +69,9 @@ int main() {
     cin >> month;
     cout << "Day: ";
     cin >> day;
-    cout << "Time in 24h format hh:mm:ss: ";
+    cout << "Hour in 24h format: ";
     cin >> time;    
+
     cout << "Final date: " << endl;
     cout << "Year: ";
     cin >> year2;
@@ -78,15 +79,16 @@ int main() {
     cin >> month2;
     cout << "Day: ";
     cin >> day2;
-    cout << "Time in 24h format hh:mm:ss: ";
+    cout << "Hour in 24h format: ";
     cin >> time2;
 
-    Log date1(year, month, day, time, "", "");
-    Log date2(year2, month2, day2, time2, "", "");
+    Log date1(year, month, day, time + ":00:00", "", "");
+    Log date2(year2, month2, day2, time2 + ":00:00", "", "");
 
-
+    // searching for valid dates and writing them in file rangeOut.txt
     for (int i = 0; i < logs.size(); i++) {
         if (date1 < logs[i] && logs[i] < date2) {
+            logs[i].print();
             rangeOut << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
         } 
     }
