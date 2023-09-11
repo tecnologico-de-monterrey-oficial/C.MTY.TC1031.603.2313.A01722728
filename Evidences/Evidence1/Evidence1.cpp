@@ -12,8 +12,8 @@ int main() {
     // Archivo de entrada
     ifstream fileIn("log603.txt");
     // Archivo de salida
-    ofstream fileOut("output603.out");
-    ofstream rangeOut("range603.out");
+    ofstream fileOut("output603.txt");
+    ofstream rangeOut("range603.txt");
     // Variable auxiliar para guardar el contenido del renglón leido
     string line;
     // Variable auxiliar para guardar el contenido de cada palabra del campo message
@@ -92,6 +92,7 @@ int main() {
     }
     // Cerramos los archivos de entrada y salida
     fileOut.close(); 
+    rangeOut.close();
     fileIn.close();
 
     return 0;
