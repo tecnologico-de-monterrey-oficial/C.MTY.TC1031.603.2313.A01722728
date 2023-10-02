@@ -1,14 +1,35 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 using namespace std;
 #include "LinkedList.h"
+#include "timer.cpp"
+
+void createListInt(LinkedList<int> &list, int quantity)
+{
+  for (int i = 0; i < quantity; i++)
+  {
+    int num = rand() % 1000000 + 1;
+    list.addLast(num);
+  }
+}
 
 int main()
 {
     int option;
-    int end = 0;
+    char keepGoing = 'y';
+    char randomList = 'n';
     string operation;
     LinkedList <int> list;
+
+    // Semilla para generar números aleatorios
+    srand(time(0));
+    // Variables para calcular el tiempo de ejecución
+    chrono::high_resolution_clock::time_point begin;
+    chrono::high_resolution_clock::time_point end;
+
+    // Menu de funciones
     vector<string> menu = {
         "addFirst", 
         "addlast", 
@@ -23,7 +44,20 @@ int main()
         "[]updateat",
         "=operator"
     };
-    while(1){
+
+    // Preguntar para generar lista aleatoria
+    cout<<"create a random list? (y/n): ";
+    cin>>randomList;
+    int quantity;
+    cout<<"quantity: ";
+    cin>>quantity;
+    createListInt(list, quantity);
+    list.print();
+
+    cout<<"keep going? (y/n): ";
+    cin>>keepGoing;
+
+    while(keepGoing == 'y'){
         for(int i=0; i<menu.size(); i++){
             cout<<i<<". "<<menu[i]<<endl;
         }
@@ -70,7 +104,12 @@ int main()
             int index;
             cout<<"index: ";
             cin>>index;
-            cout<<list.getData(index)<<endl;
+            try{
+                cout<<list.getData(index)<<endl;
+            }
+            catch(out_of_range e){
+                cout<<e.what()<<endl;
+            }
         }
         else if(operation== "updateData"){
             int data, newData;
@@ -100,7 +139,12 @@ int main()
             int index;
             cout<<"index: ";
             cin>>index;
-            cout<<list[index]<<endl;
+            try{
+                cout<<list[index]<<endl;
+            }
+            catch(out_of_range e){
+                cout<<e.what()<<endl;
+            }
         }
         else if(operation== "[]updateat"){
             int index, newData;
@@ -120,6 +164,10 @@ int main()
         else{
             cout<<"invalid option"<<endl;
         }
+
+        // keepgoing command
+        cout<<"keep going? (y/n): ";
+        cin>>keepGoing;
     }
 
     
