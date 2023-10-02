@@ -20,7 +20,6 @@ public:
     int findData(T data);
     void updateData(T data, T newData);
     void updateAt(int index, T newData);
-    // Estos mas los que faltan de tarea
     void deleteData(T data);
     void deleteAt(int index);
     T getData(int index);
@@ -46,7 +45,7 @@ template <class T>
 void LinkedList<T>::addFirst(T data)
 {
     // Asignamos el head a un nuevo nodo con data y head
-    head = new Node<T>(data, head);
+    head = new Node<T>(data, head); 
     // Aumentamos el tamaño de la lista
     size++;
 }
@@ -108,7 +107,7 @@ void LinkedList<T>::insert(int index, T data)
     }
     else
     {
-        throw out_of_range("El indice esta fuera del rango");
+        cout << "El indice esta fuera del rango" << endl;
     }
 }
 
@@ -166,7 +165,7 @@ void LinkedList<T>::updateData(T data, T newData)
         // recorrer aux
         aux = aux->next;
     }
-    cout << "Dato no encontrado" << endl;
+    cout << "El indice esta fuera del rango" << endl;
 }
 
 template <class T>
@@ -184,7 +183,7 @@ void LinkedList<T>::updateAt(int index, T data)
         aux = aux->next;
         auxIndex++;
     }
-    throw out_of_range("El indice esta fuera del rango");
+    cout << "El indice esta fuera del rango" << endl;
 }
 
 template <class T>
@@ -224,7 +223,7 @@ void LinkedList<T>::deleteAt(int index)
         aux = aux->next;
         auxIndex++;
     }
-    throw out_of_range("El indice esta fuera del rango");
+    cout << "El indice esta fuera del rango" << endl;
 }
 
 template <class T>

@@ -31,7 +31,6 @@ int main()
     cout << list[0] << " " << list[2] << endl;
 
     LinkedList<string> list2;
-    list2.addFirst("Cuchara");
     list2 = list;
     list.print();
     list2.print();

@@ -13,7 +13,7 @@ int main() {
     log2.key = "20230807103212";
     cout << log1.year << " " << log2.year << endl;
 
-    if (log1 < log2) {
+    if ("15"<"2") {
         cout << "s1 es menor a s2" << endl;
     } else {
         cout << "s1 es mayor o igual a s2" << endl;
