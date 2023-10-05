@@ -3,10 +3,11 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
-#include "LinkedList.h"
+
+#include "DoublyLinkedList.h"
 #include "timer.cpp"
 
-void createListInt(LinkedList<int> &list, int quantity)
+void createListInt(DoublyLinkedList<int> &list, int quantity)
 {
   for (int i = 0; i < quantity; i++)
   {
@@ -21,7 +22,7 @@ int main()
     char keepGoing = 'y';
     char randomList = 'n';
     string operation;
-    LinkedList <int> list;
+    DoublyLinkedList <int> list;
 
     // Semilla para generar números aleatorios
     srand(time(0));
@@ -31,7 +32,7 @@ int main()
 
     // Menu de funciones
     vector<string> menu = {
-        "addFirst", 
+        "addfirst", 
         "addlast", 
         "insert",
         "deleteData",
@@ -41,8 +42,11 @@ int main()
         "updateAt",
         "findData",
         "[]getData",
-        "[]updateat",
-        "=operator"
+        "=operator",
+        "clear",
+        "sort",
+        "duplicate",
+        "removeDuplicates"
     };
 
     // Preguntar para generar lista aleatoria
@@ -53,9 +57,9 @@ int main()
         cout<<"quantity: ";
         cin>>quantity;
         createListInt(list, quantity);
-        list.print();
+        list.print("asc");
     }
-
+    
     cout<<"keep going? (y/n): ";
     cin>>keepGoing;
 
@@ -67,42 +71,51 @@ int main()
         cin >> option;
 
         operation = menu[option];
-        if(operation== "addFirst"){
+        if(operation=="addfirst"){
             int data;
             cout<<"data: ";
             cin>>data;
             list.addFirst(data);
-            list.print();
-        }else if(operation== "addlast"){
+            list.print("asc");
+        }
+        else if(operation=="addlast"){
             int data;
             cout<<"data: ";
             cin>>data;
             list.addLast(data);
-            list.print();
-        }else if(operation== "insert"){
-            int index, data;
-            cout<<"index: ";
-            cin>>index;
+            list.print("asc");
+        }
+        else if(operation=="insert"){
+            // insert with out of range exception handling
+            int data, index;
             cout<<"data: ";
             cin>>data;
-            list.insert(index, data);
-            list.print();
+            cout<<"index: ";
+            cin>>index;
+            try{
+                list.insert(data, index);
+                list.print("asc");
+            }
+            catch(out_of_range e){
+                cout<<e.what()<<endl;
+            }
         }
-        else if(operation== "deleteData"){
+        else if(operation=="deleteData"){
             int data;
             cout<<"data: ";
             cin>>data;
             list.deleteData(data);
-            list.print();
+            list.print("asc");
         }
-        else if(operation== "deleteAt"){
+        else if(operation=="deleteAt"){
             int index;
             cout<<"index: ";
             cin>>index;
             list.deleteAt(index);
-            list.print();
+            list.print("asc");
         }
-        else if(operation== "getData"){
+        else if(operation=="getData"){
+            // with out of range exception handling
             int index;
             cout<<"index: ";
             cin>>index;
@@ -113,31 +126,45 @@ int main()
                 cout<<e.what()<<endl;
             }
         }
-        else if(operation== "updateData"){
+        else if(operation=="updateData"){
             int data, newData;
             cout<<"data: ";
             cin>>data;
-            cout<<"newData: ";
+            cout<<"new data: ";
             cin>>newData;
-            list.updateData(data, newData);
-            list.print();
+            // with out of range exception handling
+            try{
+                list.updateData(data, newData);
+                list.print("asc");
+            }
+            catch(out_of_range e){
+                cout<<e.what()<<endl;
+            }
+
         }
-        else if(operation== "updateAt"){
+        else if(operation=="updateAt"){
             int index, newData;
             cout<<"index: ";
             cin>>index;
-            cout<<"newData: ";
+            cout<<"new data: ";
             cin>>newData;
-            list.updateAt(index, newData);
-            list.print();
+            // with out of range exception handling
+            try{
+                list.updateAt(index, newData);
+                list.print("asc");
+            }
+            catch(out_of_range e){
+                cout<<e.what()<<endl;
+            }
         }
-        else if(operation== "findData"){
+        else if(operation=="findData"){
             int data;
             cout<<"data: ";
             cin>>data;
             cout<<list.findData(data)<<endl;
         }
-        else if(operation== "[]getData"){
+        else if(operation=="[]getData"){
+            // with out of range exception handling
             int index;
             cout<<"index: ";
             cin>>index;
@@ -148,20 +175,27 @@ int main()
                 cout<<e.what()<<endl;
             }
         }
-        else if(operation== "[]updateat"){
-            int index, newData;
-            cout<<"index: ";
-            cin>>index;
-            cout<<"newData: ";
-            cin>>newData;
-            list.updateAt(index, newData);
-            list.print();
-        }
-        else if(operation== "=operator"){
-            LinkedList<int> list2;
+        else if(operation=="=operator"){
+            DoublyLinkedList<int> list2;
             list2 = list;
-            list.print();
-            list2.print();
+            list.print("asc");
+            list2.print("asc");
+        }
+        else if(operation=="clear"){
+            list.clear();
+            list.print("asc");
+        }
+        else if(operation=="sort"){
+            list.sort();
+            list.print("asc");
+        }
+        else if(operation=="duplicate"){
+            list.duplicate();
+            list.print("asc");
+        }
+        else if(operation=="removeDuplicates"){
+            list.removeDuplicates();
+            list.print("asc");
         }
         else{
             cout<<"invalid option"<<endl;

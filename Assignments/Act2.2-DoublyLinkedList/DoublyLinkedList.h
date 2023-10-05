@@ -38,6 +38,139 @@ DoublyLinkedList<T>::DoublyLinkedList() {
 }
 
 template <class T>
+void DoublyLinkedList<T>::sort(){
+    // Validamos si la lista tiene más de un elemento
+    if (size > 1) {
+        // Definimos un apuntador auxiliar igual a head
+        DNode<T>* aux = head;
+        // Definimos un apuntador auxiliar2 igual a head
+        DNode<T>* aux2 = head;
+        // Recorremos la lista
+        while (aux != nullptr) {
+            // Recorremos la lista
+            while (aux2 != nullptr) {
+                // Validamos si el valor de aux es mayor al valor de aux2
+                if (aux->data > aux2->data) {
+                    // Intercambiamos los valores
+                    T auxData = aux->data;
+                    aux->data = aux2->data;
+                    aux2->data = auxData;
+                }
+                // Recorremos aux2
+                aux2 = aux2->next;
+            }
+            // Recorremos aux
+            aux = aux->next;
+            // Actualizamos aux2
+            aux2 = aux;
+        }
+    }
+}
+
+template <class T>
+void DoublyLinkedList<T>::duplicate(){
+    // Definimos un apuntador auxiliar igual a head
+    DNode<T>* aux = head;
+    // Recorremos la lista
+    while (aux != nullptr) {
+        // Creamos un nuevo nodo con el valor de data
+        DNode<T>* aux2 = new DNode<T>(aux->data);
+        aux2->next = aux->next;
+        aux2->prev = aux;
+
+        aux->next = aux2;
+        aux = aux->next->next;
+    }
+    size = size * 2;  
+}
+
+template <class T>
+void DoublyLinkedList<T>::removeDuplicates(){
+    // Definimos un apuntador auxiliar igual a head
+    DNode<T>* aux = head;
+    // Recorremos la lista
+    while (aux != nullptr) {
+        // Definimos un apuntador auxiliar2 igual a aux
+        DNode<T>* aux2 = aux;
+        // Recorremos la lista
+        while (aux2 != nullptr) {
+            // Validamos si el valor de aux es igual al valor de aux2
+            if (aux->data == aux2->data && aux != aux2) {
+                // Definimos un apuntador auxiliar3 igual a aux2
+                DNode<T>* aux3 = aux2;
+                // Validamos si aux2 es el primer nodo
+                if (aux2->prev == nullptr) {
+                    // Actualizamos head
+                    head = aux2->next;
+                } else {
+                    // Actualizamos el nodo que estaba antes de aux2
+                    aux2->prev->next = aux2->next;
+                }
+                // Validamos si aux2 es el último nodo
+                if (aux2->next == nullptr) {
+                    // Actualizamos tail
+                    tail = aux2->prev;
+                } else {
+                    // Actualizamos el nodo que estaba después de aux2
+                    aux2->next->prev = aux2->prev;
+                }
+                // Recorremos aux2
+                aux2 = aux2->next;
+                // Borramos aux3
+                delete aux3;
+                // Decrementamos el valor de size
+                size--;
+            } else {
+                // Recorremos aux2
+                aux2 = aux2->next;
+            }
+        }
+        // Recorremos aux
+        aux = aux->next;
+    }
+}
+
+template <class T>
+void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
+    // Borramos la lista actual
+    clear();
+    // Definimos un apuntador auxiliar igual a head
+    DNode<T>* aux = list.head;
+    // Recorremos la lista
+    while (aux != nullptr) {
+        // Agregamos el valor de aux a la lista
+        addLast(aux->data);
+        // Recorremos aux
+        aux = aux->next;
+    }
+}
+
+template <class T>
+void DoublyLinkedList<T>::clear() {
+    // Definimos un apuntador auxiliar igual a head
+    DNode<T>* aux = head;
+    // Recorremos la lista
+    while (aux != nullptr) {
+        // Definimos un apuntador auxiliar2 igual a aux
+        DNode<T>* aux2 = aux;
+        // Recorremos aux
+        aux = aux->next;
+        // Borramos aux2
+        delete aux2;
+    }
+    // Actualizamos head y tail
+    head = nullptr;
+    tail = nullptr;
+    // Actualizamos el valor de size
+    size = 0;
+}
+
+template <class T>
+int DoublyLinkedList<T>::getSize() {
+    return size;
+}
+
+template <class T>
 void DoublyLinkedList<T>::addFirst(T data) {
     // Asignamos a head un nuevo nodo con data, head y nullptr
     head = new DNode<T>(data, head, nullptr);
@@ -385,7 +518,7 @@ void DoublyLinkedList<T>::print(string mode) {
         }
         // Imprimos un salto de linea
         cout << endl;
-    } else {
+    } else if (mode == "dsc") {
         // Definimos un apuntador auxiliar que sea igual a head
         DNode<T>* aux = tail;
         while (aux != nullptr) {
