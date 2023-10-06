@@ -190,16 +190,17 @@ template <class T>
 void LinkedList<T>::deleteData(T data)
 {
     Node<T> *aux = head;
-    Node<T> *aux2 = head;
     while (aux->next != nullptr)
-    {
-        if (aux->data == data)
-        {
-            aux2->next = aux->next;
-            delete aux;
+    {   
+        if(head->data == data){
+            head = head->next;
             return;
         }
-        aux2 = aux;
+        else if (aux->next->data == data)
+        {
+            aux->next = aux->next->next;
+            return;
+        }
         aux = aux->next;
     }
     cout << "Dato no encontrado" << endl;
@@ -209,17 +210,18 @@ template <class T>
 void LinkedList<T>::deleteAt(int index)
 {
     Node<T> *aux = head;
-    Node<T> *aux2 = head;
     int auxIndex = 0;
     while (aux != nullptr)
     {
-        if (auxIndex == index)
-        {
-            aux2->next = aux->next;
-            delete aux;
+        if(index == 0){
+            head = head->next;
             return;
         }
-        aux2 = aux;
+        else if (auxIndex == index-1)
+        {
+            aux->next = aux->next->next;
+            return;
+        }
         aux = aux->next;
         auxIndex++;
     }
