@@ -70,7 +70,7 @@ int main()
         cout << "select an option: ";
         cin >> option;
 
-        operation = menu[option];
+        operation = menu[option%menu.size()];
         if(operation=="addfirst"){
             int data;
             cout<<"data: ";
@@ -93,7 +93,7 @@ int main()
             cout<<"index: ";
             cin>>index;
             try{
-                list.insert(data, index);
+                list.insert(index, data);
                 list.print("asc");
             }
             catch(out_of_range e){

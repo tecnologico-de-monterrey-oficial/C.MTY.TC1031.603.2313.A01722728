@@ -66,7 +66,7 @@ int main()
         cout << "select an option: ";
         cin >> option;
 
-        operation = menu[option];
+        operation = menu[option % menu.size()];
         if(operation== "addFirst"){
             int data;
             cout<<"data: ";

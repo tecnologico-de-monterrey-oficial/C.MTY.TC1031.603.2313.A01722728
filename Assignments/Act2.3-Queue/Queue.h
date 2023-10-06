@@ -43,8 +43,16 @@ void Queue<T>::pop() {
         cout << "removed ";
         front();
         Node<T>* aux = head;
-        head = head->next;
-        delete aux;
+        if(head->next == nullptr){
+            head = nullptr;
+            tail = nullptr;
+        }else{
+            head = head->next;
+            delete aux;
+        }
+
+    }else{
+        cout << "Queue is empty" << endl;
     }
     print();
 }

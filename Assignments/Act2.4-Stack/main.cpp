@@ -16,7 +16,7 @@ int main(){
             cout << i << ". " << menu[i] << endl;
         }
         cin >> option;
-        operation = menu[option];
+        operation = menu[option%menu.size()];
         if(operation == "push"){
             cout << "Enter the data: ";
             cin >> data;
@@ -27,6 +27,8 @@ int main(){
             s.top();
         }else if(operation == "print"){
             s.print();
+        }else{
+            cout << "Exit" << endl;
         }
     }
 
