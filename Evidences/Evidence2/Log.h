@@ -1,5 +1,6 @@
 #pragma once
-
+#include <vector>
+#include <string>
 struct Log {
     string year;
     string month;
@@ -7,14 +8,12 @@ struct Log {
     string time;
     string ip;
     string message;
-    string key1;
-    string key2;
+    string key;
     bool operator<(Log log);
-    string key1Generator();
-    string key2Generator();
-    string getIp();
+    string keyGenerator();
+    void print();
+
     Log(string year, string month, string day, string time, string ip, string message);
-    friend ostream& operator<<(ostream& os, Log log); 
 };
 
 Log::Log(string year, string month, string day, string time, string ip, string message) {
@@ -25,34 +24,34 @@ Log::Log(string year, string month, string day, string time, string ip, string m
     this->ip = ip;
     this->message = message;
     // Generar la clave 
-    key1 = key1Generator();
-    key2 = key2Generator();
+    key = keyGenerator();
 }
 
+string Log::keyGenerator() {
+    string key = "";
+    // string vector of month names
+    vector<string> months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    int monthNumber = 0;
+    for(string monthName : months){
+        if(monthName == month){
+            break;
+        }
+        monthNumber++;
+    }
 
-string Log::getIp() {
-    return "10.14.075.001"
+    // string vector of first 12 capital letters
+    vector<string> letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K","L"};
+
+    // the key uses letters instead of numbers for the month
+    // in order to use the sort algorithm properly
+    key = key + year + letters[monthNumber] + day + time;
+    return key;
 }
-string Log::key1Generator() {
-    string mm;
-    if (month == "Jan") {
-        mm = "01";
-    }
-    return year + mm + day + time;
-}
-string Log::key2Generator() {
-    string mm;
-    if (month == "Jan") {
-        mm = "01";
-    }
-    return getIp() + year + mm + day + time;
+
+void Log::print(){
+    cout << year << " " << month << " " << day << " " << time << " " << ip << " " << message << endl;
 }
 
 bool Log::operator<(Log log) {
     return key < log.key;
-}
-
-ostream& operator<<(ostream& os, Log log) {
-    os << "Log: " << log.month << " " << log.day << " " << log.year << " " << log.time << " " << log.ip << " " << log.message << endl;
-    return os;
 }

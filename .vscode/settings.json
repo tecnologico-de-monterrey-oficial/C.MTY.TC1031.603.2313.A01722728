@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "xstring": "cpp",
+        "vector": "cpp",
+        "xutility": "cpp",
+        "algorithm": "cpp",
+        "forward_list": "cpp"
     }
 }
