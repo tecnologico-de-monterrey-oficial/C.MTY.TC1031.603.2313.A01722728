@@ -6,6 +6,7 @@
         "vector": "cpp",
         "xutility": "cpp",
         "algorithm": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "iosfwd": "cpp"
     }
 }
