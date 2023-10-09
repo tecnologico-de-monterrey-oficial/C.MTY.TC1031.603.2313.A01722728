@@ -4,17 +4,16 @@
 #include <sstream>
 using namespace std;
 
-#include "algorithms.cpp"
+#include "DoublyLinkedList.h"
 
-#include "DLL.h"
 
 int main() {
 
     // Archivo de entrada
     ifstream fileIn("log603-2.txt");
     // Archivo de salida
-    ofstream fileOut("output603.txt");
-    ofstream rangeOut("range603.txt");
+    ofstream datesFile("output602-1.out");
+    ofstream ipsFile("output602-2.out");
     // Variable auxiliar para guardar el contenido del renglón leido
     string line;
     // Variable auxiliar para guardar el contenido de cada palabra del campo message
@@ -26,7 +25,7 @@ int main() {
     string time;
     string ip;
     string message;
-    DoubleLinkedListVector<Log> logs;
+    DoublyLinkedList logs;
     // variables para fecha final
     string year2;
     string month2;
@@ -56,7 +55,7 @@ int main() {
 
     // Escribiendo los registros ordenados en el archivo de salida
     for (size_t i = 0; i < logs.getSize(); i++) {
-        fileOut << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+        datesFile << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
     }
 
 
@@ -89,17 +88,17 @@ int main() {
     Log date1(year, month, day, time + ":00:00", "", "");
     Log date2(year2, month2, day2, time2 + ":00:00", "", "");
 
-    // searching for valid dates and writing them in file rangeOut.txt
+    // searching for valid dates and writing them in file ipsFile.txt
     for (size_t i = 0; i < logs.getSize(); i++) {
         if (date1 < logs[i] && logs[i] < date2) {
             logs[i].print();
-            rangeOut << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+            ipsFile << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
         } 
     }*/
 
     // Cerramos los archivos de entrada y salida
-    fileOut.close(); 
-    rangeOut.close();
+    datesFile.close(); 
+    ipsFile.close();
     fileIn.close();
 
     return 0;

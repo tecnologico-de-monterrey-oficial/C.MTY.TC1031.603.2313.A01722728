@@ -13,8 +13,19 @@ struct Log {
     string keyGenerator();
     void print();
 
+    Log();
     Log(string year, string month, string day, string time, string ip, string message);
 };
+
+Log::Log() {
+    year = "";
+    month = "";
+    day = "";
+    time = "";
+    ip = "";
+    message = "";
+    key = "";
+}
 
 Log::Log(string year, string month, string day, string time, string ip, string message) {
     this->year = year;
