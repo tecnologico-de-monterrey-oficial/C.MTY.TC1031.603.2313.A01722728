@@ -67,7 +67,7 @@ int main() {
         cont++;
     }
     
-    // Ordenamos los registros
+    // Ordenamos los registros 
     logs.sort();
 
     // Escribiendo los registros ordenados en el archivo de salida

@@ -17,7 +17,10 @@ private:
     int size = 0;
 public:
     DoublyLinkedList();
+    DNode* getHead();
+    DNode* getTail();
     void sort(); 
+    void quicksort(DNode* left, DNode* right);
     void push_back(Log data);
     void removeLast();
     Log& operator[](int index); // returns the value at index
@@ -29,6 +32,46 @@ public:
 DoublyLinkedList::DoublyLinkedList() {
     head = nullptr;
     tail = nullptr;
+}
+
+DNode* DoublyLinkedList::getHead() {
+    return head;
+}
+
+DNode* DoublyLinkedList::getTail() {
+    return tail;
+}
+
+
+void DoublyLinkedList::quicksort(DNode* left, DNode* right) {
+    if (left == nullptr || right == nullptr) {
+        return;
+    }
+    if (left != right && left->prev != right) {
+        DNode* pivot = left;
+        DNode* i = left;
+        DNode* j = right;
+        while (i != j) {
+            while (i != j && i->data < pivot->data) {
+                i = i->next;
+            }
+            while (j != i && pivot->data < j->data) {
+                j = j->prev;
+            }
+            if (i != j) {
+                Log aux = i->data;
+                i->data = j->data;
+                j->data = aux;
+            }
+        }
+        if (i != pivot) {
+            Log aux = i->data;
+            i->data = pivot->data;
+            pivot->data = aux;
+        }
+        quicksort(left, i->prev);
+        quicksort(i->next, right);
+    }
 }
 
 void DoublyLinkedList::sort(){
