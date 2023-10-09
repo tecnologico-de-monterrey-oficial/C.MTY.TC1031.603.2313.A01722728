@@ -35,8 +35,20 @@ int main() {
     DoublyLinkedList ipsInRange;
     string ip2;
 
-    
-    
+    //Variable de contador de ips por mes
+    int jan = 0;
+    int feb = 0;
+    int mar = 0;
+    int apr = 0;
+    int may = 0;
+    int jun = 0;
+    int jul = 0;
+    int aug = 0;
+    int sep = 0;
+    int oct = 0;
+    int nov = 0;
+    int dec = 0;
+        
     // Variable auxiliar para guardar el contador de registros
     int cont = 0;
     // Ciclo para leer todo los renglones del archivo de entrada
@@ -99,7 +111,55 @@ int main() {
         ipsDesc << ipsInRange[i].ip << " " << ipsInRange[i].year << " " << ipsInRange[i].month << " " << ipsInRange[i].day << " " << ipsInRange[i].time << " "  << ipsInRange[i].message << endl;
     }
 
+    //from IpsInRange calculating amount of ips per month
+    
+    
+    for (int i = 0; i < ipsInRange.getSize(); i++) {
+        if(ipsInRange[i].month == "Jan"){
+            jan++;
+        }else if(ipsInRange[i].month == "Feb"){
+            feb++;
+        }else if(ipsInRange[i].month == "Mar"){
+            mar++;
+        }else if(ipsInRange[i].month == "Apr"){
+            apr++;
+        }else if(ipsInRange[i].month == "May"){
+            may++;
+        }else if(ipsInRange[i].month == "Jun"){
+            jun++;
+        }else if(ipsInRange[i].month == "Jul"){
+            jul++;
+        }else if(ipsInRange[i].month == "Aug"){
+            aug++;
+        }else if(ipsInRange[i].month == "Sep"){
+            sep++;
+        }else if(ipsInRange[i].month == "Oct"){
+            oct++;
+        }else if(ipsInRange[i].month == "Nov"){
+            nov++;
+        }else if(ipsInRange[i].month == "Dec"){
+            dec++;
+        }
+    }
+
+    //displying amount of ips per month to the command line
+    cout << "Amount of ips per month: " << endl;
+    cout << "Jan: " << jan << endl;
+    cout << "Feb: " << feb << endl;
+    cout << "Mar: " << mar << endl;
+    cout << "Apr: " << apr << endl;
+    cout << "May: " << may << endl;
+    cout << "Jun: " << jun << endl;
+    cout << "Jul: " << jul << endl;
+    cout << "Aug: " << aug << endl;
+    cout << "Sep: " << sep << endl;
+    cout << "Oct: " << oct << endl;
+    cout << "Nov: " << nov << endl;
+    cout << "Dec: " << dec << endl;
+
     // Cerramos los archivos de entrada y salida
+    ipsAsc.close();
+    ipsDesc.close();
     datesFile.close(); 
     ipsFile.close();
     fileIn.close();
