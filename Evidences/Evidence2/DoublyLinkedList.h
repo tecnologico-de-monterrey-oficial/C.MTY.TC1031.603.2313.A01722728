@@ -17,7 +17,7 @@ private:
     int size = 0;
 public:
     DoublyLinkedList();
-    void sort(); //using quicksort
+    void sort(); 
     void push_back(Log data);
     void removeLast();
     Log& operator[](int index); // returns the value at index

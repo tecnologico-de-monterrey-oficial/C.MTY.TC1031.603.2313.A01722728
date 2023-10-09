@@ -9,8 +9,12 @@ struct Log {
     string ip;
     string message;
     string key;
+    string ipKey;
+    string keyBackup;
     bool operator<(Log log);
     string keyGenerator();
+    void keyToIpKey();
+    void RecoverKey();
     void print();
 
     Log();
@@ -36,6 +40,16 @@ Log::Log(string year, string month, string day, string time, string ip, string m
     this->message = message;
     // Generar la clave 
     key = keyGenerator();
+    ipKey = ip + key;
+    keyBackup = key;
+}
+
+void Log::keyToIpKey() {
+    key = ipKey;
+}
+
+void Log::RecoverKey() {
+    key = keyBackup;
 }
 
 string Log::keyGenerator() {

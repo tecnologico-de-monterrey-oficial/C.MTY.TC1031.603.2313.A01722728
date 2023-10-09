@@ -26,11 +26,6 @@ int main() {
     string ip;
     string message;
     DoublyLinkedList logs;
-    // variables para fecha final
-    string year2;
-    string month2;
-    string day2;
-    string time2;
     
     // Variable auxiliar para guardar el contador de registros
     int cont = 0;
@@ -54,47 +49,23 @@ int main() {
     logs.sort();
 
     // Escribiendo los registros ordenados en el archivo de salida
-    for (size_t i = 0; i < logs.getSize(); i++) {
+    //Cambiando llaves de fecha a llaves de ips
+    for (int i = 0; i < logs.getSize(); i++) {
         datesFile << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+        logs[i].keyToIpKey();
+    }
+
+    // Ordenamos los registros por ip
+    logs.sort();
+
+    for (int i = 0; i < logs.getSize(); i++) {
+        ipsFile << logs[i].ip << " " << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " "  << logs[i].message << endl;
     }
 
 
     cout << "La cantidad de registros es: " << logs.getSize() << endl;
-
-    /*
-
-    // Asking for a range of dates
-    cout << "Using binary search to find dates between range: " << endl;
-    cout << "Initial date: " << endl;
-    cout << "Year: ";
-    cin >> year;
-    cout << "Month capitalized and in 3 letter format, (Jan, Feb, Mar): ";
-    cin >> month;
-    cout << "Day: ";
-    cin >> day;
-    cout << "Hour in 24h format: ";
-    cin >> time;    
-
-    cout << "Final date: " << endl;
-    cout << "Year: ";
-    cin >> year2;
-    cout << "Month capitalized and in 3 letter format, (Jan, Feb, Mar): ";
-    cin >> month2;
-    cout << "Day: ";
-    cin >> day2;
-    cout << "Hour in 24h format: ";
-    cin >> time2;
-
-    Log date1(year, month, day, time + ":00:00", "", "");
-    Log date2(year2, month2, day2, time2 + ":00:00", "", "");
-
-    // searching for valid dates and writing them in file ipsFile.txt
-    for (size_t i = 0; i < logs.getSize(); i++) {
-        if (date1 < logs[i] && logs[i] < date2) {
-            logs[i].print();
-            ipsFile << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
-        } 
-    }*/
+    
+     
 
     // Cerramos los archivos de entrada y salida
     datesFile.close(); 
