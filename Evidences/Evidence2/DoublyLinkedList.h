@@ -20,6 +20,7 @@ public:
     DNode* getHead();
     DNode* getTail();
     void sort(); 
+    Log getPivot(DNode* left, DNode* right);
     void quicksort(DNode* left, DNode* right);
     void push_back(Log data);
     void removeLast();
@@ -42,35 +43,25 @@ DNode* DoublyLinkedList::getTail() {
     return tail;
 }
 
+Log DoublyLinkedList::getPivot(DNode* left, DNode* right) {
+    Log pivot = left->data;
+    DNode* aux = left->next;
+    while (aux != right) {
+        if (aux->data < pivot) {
+            left = left->next;
+            swap(left->data, aux->data);
+        }
+        aux = aux->next;
+    }
+    swap(left->data, left->data);
+    return left->data;
+}
 
 void DoublyLinkedList::quicksort(DNode* left, DNode* right) {
-    if (left == nullptr || right == nullptr) {
-        return;
-    }
-    if (left != right && left->prev != right) {
-        DNode* pivot = left;
-        DNode* i = left;
-        DNode* j = right;
-        while (i != j) {
-            while (i != j && i->data < pivot->data) {
-                i = i->next;
-            }
-            while (j != i && pivot->data < j->data) {
-                j = j->prev;
-            }
-            if (i != j) {
-                Log aux = i->data;
-                i->data = j->data;
-                j->data = aux;
-            }
-        }
-        if (i != pivot) {
-            Log aux = i->data;
-            i->data = pivot->data;
-            pivot->data = aux;
-        }
-        quicksort(left, i->prev);
-        quicksort(i->next, right);
+    if (left != right && right->next != left) {
+        Log pivot = getPivot(left, right);
+        quicksort(left, left);
+        quicksort(left->next, right);
     }
 }
 

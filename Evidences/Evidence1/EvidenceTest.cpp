@@ -3,20 +3,13 @@ using namespace std;
 #include "Log.h"
 
 int main() {
+    string ip1 = "10.148.99.111";
+    string ip2 = "10.114.230.135";
 
-    
-
-    Log log1("2022", "Sep", "17", "06:13:58", "10.45.134.186", "Human error");
-    Log log2("2023", "Aug", "07", "10:32:12", "", "");
-
-    log1.key = "20220927061358";
-    log2.key = "20230807103212";
-    cout << log1.year << " " << log2.year << endl;
-
-    if ("15"<"2") {
-        cout << "s1 es menor a s2" << endl;
+    if (ip1>ip2) {
+        cout << "1 mayor" << endl;
     } else {
-        cout << "s1 es mayor o igual a s2" << endl;
+        cout << "2 mayor" << endl;
     }
 
 
