@@ -1,10 +1,11 @@
-#ifndef Heap_h
-#define Heap_h
+#ifndef MinHeap_h
+#define MinHeap_h
 
 #include <vector>
+using namespace std;
 
 template <class T>
-class Heap
+class MinHeap
 {
 private:
     vector<T> heap;
@@ -12,9 +13,9 @@ private:
     void downSort(int father);
 
 public:
-    Heap();
-    Heap(vector<T> list);
-    Heap(initializer_list<T> list);
+    MinHeap();
+    MinHeap(vector<T> list);
+    MinHeap(initializer_list<T> list);
     T pop(); // Elimina al elemento de mayor prioridad
     T top();
     void push(T data);
@@ -24,12 +25,12 @@ public:
 };
 
 template <class T>
-Heap<T>::Heap()
+MinHeap<T>::MinHeap()
 {
 }
 
 template <class T>
-void Heap<T>::swap(int a, int b)
+void MinHeap<T>::swap(int a, int b)
 {
     T aux = heap[a];
     heap[a] = heap[b];
@@ -37,12 +38,12 @@ void Heap<T>::swap(int a, int b)
 }
 
 template <class T>
-void Heap<T>::downSort(int father)
+void MinHeap<T>::downSort(int father)
 {
     // definimos variables para los hijos
     int son1;
     int son2;
-    int big;
+    int smol;
     // Recorremos mientras father tenga hijos
     while (father * 2 + 1 < heap.size())
     {
@@ -54,20 +55,20 @@ void Heap<T>::downSort(int father)
             // Asignamos el índice del segundo hijo
             son2 = father * 2 + 2;
             // Validamos cual de los dos hijos es mayor
-            heap[son1] > heap[son2] ? big = son1 : big = son2;
+            heap[son1] < heap[son2] ? smol = son1 : smol = son2;
         }
         else
         {
             // el único hijo es el mas grande
-            big = son1;
+            smol = son1;
         }
         // Validamos si el mpás grande de los hijos es mayor al padre
-        if (heap[big] > heap[father])
+        if (heap[smol] < heap[father])
         {
             // Los intercambiamos
-            swap(father, big);
+            swap(father, smol);
             // Hacemos el padre igual al mayor de los hijos
-            father = big;
+            father = smol;
         }
         else
         {
@@ -78,7 +79,7 @@ void Heap<T>::downSort(int father)
 }
 
 template <class T>
-Heap<T>::Heap(vector<T> list)
+MinHeap<T>::MinHeap(vector<T> list)
 {
     // Asignamos el valor de la lista al heap
     heap = list;
@@ -95,7 +96,7 @@ Heap<T>::Heap(vector<T> list)
 }
 
 template <class T>
-Heap<T>::Heap(initializer_list<T> list)
+MinHeap<T>::MinHeap(initializer_list<T> list)
 {
     // Asignamos el valor de la lista al heap
     heap = list;
@@ -112,7 +113,7 @@ Heap<T>::Heap(initializer_list<T> list)
 }
 
 template <class T>
-T Heap<T>::pop()
+T MinHeap<T>::pop()
 {
     if (!heap.empty())
     {
@@ -132,7 +133,7 @@ T Heap<T>::pop()
 }
 
 template <class T>
-T Heap<T>::top()
+T MinHeap<T>::top()
 {
     if (!heap.empty())
     {
@@ -143,14 +144,14 @@ T Heap<T>::top()
 }
 
 template <class T>
-void Heap<T>::push(T data){
+void MinHeap<T>::push(T data){
     heap.push_back(data);
     int son = heap.size() - 1;
 
     //recorremos sus ancestros
     while(son>0){
         int father = (son-1)/2;
-        if(heap[father]<heap[son]){
+        if(heap[father]>heap[son]){
             swap(father,son);
             son = father;
         } else {
@@ -160,13 +161,13 @@ void Heap<T>::push(T data){
 }
 
 template <class T>
-int Heap<T>::getSize()
+int MinHeap<T>::getSize()
 {
     return heap.size();
 }
 
 template <class T>
-void Heap<T>::print()
+void MinHeap<T>::print()
 {
     for (auto el : heap)
     {
@@ -176,9 +177,9 @@ void Heap<T>::print()
 }
 
 template <class T>
-bool Heap<T>::isEmpty()
+bool MinHeap<T>::isEmpty()
 {
     return heap.empty();
 }
 
-#endif /* Heap_h */
+#endif /* MinHeap_h */
