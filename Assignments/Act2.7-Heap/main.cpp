@@ -94,7 +94,15 @@ int main() {
         }else if(operation=="getSize"){
             cout << "Size: " << heap.getSize() << endl;
         }else if(operation=="print"){
-            heap.print();
+            string heapType;
+            cout << "Type of heap (max/min): ";
+            cin >> heapType;
+            if(heapType=="max"){
+                heap.print();
+            }else if(heapType=="min"){
+                MinHeap<int> minHeap(heap.getHeap());
+                minHeap.print();
+            }
         }
     }
 
