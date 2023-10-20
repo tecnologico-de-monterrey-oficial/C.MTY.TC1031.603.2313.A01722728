@@ -12,6 +12,7 @@ private:
     void downSort(int father);
 
 public:
+    vector<T> getHeap();
     Heap();
     Heap(vector<T> list);
     Heap(initializer_list<T> list);
@@ -22,6 +23,12 @@ public:
     void print();
     bool isEmpty();
 };
+
+template <class T>
+vector<T> Heap<T>::getHeap()
+{
+    return heap;
+}
 
 template <class T>
 Heap<T>::Heap()
