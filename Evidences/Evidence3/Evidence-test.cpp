@@ -88,6 +88,6 @@ int main() {
     MaxHeapSort.close();
     MinHeapSort.close();
 
-    
+
     return 0;
 }
