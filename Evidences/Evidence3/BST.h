@@ -18,6 +18,7 @@ public:
     BST();
     void insert(T data);
     bool find(T data);
+    int findAndCount(T data);
     bool remove(T data);
     void print();
     void visit(int type);
@@ -96,6 +97,25 @@ bool BST<T>::find(T data) {
     }
     // No lo encontramos
     return false;
+}
+
+template <class T>
+int BST<T>::findAndCount(T data) {
+    // Creamos un apuntador auxiliar igual a root
+    TNode<T>* aux = root;
+    // Recorremos el árbol para buscar el nodo
+    int cont = 0;
+    while (aux != nullptr) {
+        // Validamos si data es igual a aux->data
+        if (data == aux->data) {
+            // Regresamos 
+            cont++;
+        }
+        // Recorremos aux
+        data < aux->data ? aux = aux->left : aux = aux->right;
+    }
+    // Return
+    return cont;
 }
 
 template <class T>

@@ -9,6 +9,7 @@
         "forward_list": "cpp",
         "iosfwd": "cpp",
         "xiosbase": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "ostream": "cpp"
     }
 }

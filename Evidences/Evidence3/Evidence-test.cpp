@@ -1,11 +1,13 @@
 #include <iostream>
 using namespace std;
 #include <vector>
+#include <set>
 #include <fstream>
 #include <sstream>
 #include "Log.h"
 #include "Heap.h"
 #include "MinHeap.h"
+#include "BST.h"
 
 template <class T>
 void createList(vector<T> &list, int quantity)
@@ -37,8 +39,8 @@ int main() {
     // Archivo de entrada
     ifstream fileIn("log603-3.txt");
     // Archivo de salida
-    ofstream MaxHeapSort("output603-1.txt");
-    ofstream MinHeapSort("output603-2.txt");
+    ofstream MaxHeapSort("output603-1.out");
+    ofstream MinHeapSort("output603-2.out");
     // Variable auxiliar para guardar el contenido del renglón leido
     string line;
     // Variable auxiliar para guardar el contenido de cada palabra del campo message
@@ -51,6 +53,9 @@ int main() {
     string ip;
     string message;
     vector<Log> logs;
+    BST<string> ipBst;
+    set<string> ipSet;
+    vector<string> mostIps;
     
     // Variable auxiliar para guardar el contador de registros
     int cont = 0;
@@ -66,6 +71,8 @@ int main() {
         }
         Log log(year, month, day, time, ip, message);
         logs.push_back(log);
+        ipBst.insert(ip);
+        ipSet.insert(ip);
         // Incrementamos el contador de registros
         cont++;
     }
@@ -83,6 +90,29 @@ int main() {
     for (int i = 0; i < logs.size(); i++) {
         MinHeapSort << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
     }
+
+    
+    //finding most repeated ips
+    for(string ip : ipSet){
+        int count = ipBst.findAndCount(ip);
+        if(count > 1){
+            ip = "Count: " + to_string(count) + " Ip: " + ip;
+            mostIps.push_back(ip);
+        }
+    }
+
+    heapSort(mostIps, "max");
+
+    for(int i=0; i<10; i++){
+        cout << mostIps[i] << endl;
+    }
+
+    //find count of ips
+    cout << ipBst.findAndCount("10.14.255.107") << endl;
+    cout << ipBst.findAndCount("10.14.255.10712") << endl;
+
+
+    
 
     fileIn.close();
     MaxHeapSort.close();
