@@ -77,43 +77,49 @@ int main() {
         cont++;
     }
 
-    heapSort(logs, "max");
+    vector<string> menu = {"Max Heapsort", "Min Heapsort", "10 Most repeated ips", "Find count of ips", "exit"};
+    int option = 0;
+    string operation = "";
 
-    // Escribiendo los registros ordenados en el archivo maxHeapSort.txt
-    for (int i = 0; i < logs.size(); i++) {
-        MaxHeapSort << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
-    }
+    while(operation!="exit"){
+        cout << "Select an option:" << endl;
+        for(int i=0; i<menu.size(); i++){
+            cout << i+1 << ". " << menu[i] << endl;
+        }
+        cin >> option;
+        operation = menu[(option-1)%menu.size()];
+        if(operation=="Max Heapsort"){
+            heapSort(logs, "max");
+            for(int i=0; i<logs.size(); i++){
+                MaxHeapSort << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+            }
+        }else if(operation=="Min Heapsort"){
+            heapSort(logs, "min");
+            for(int i=0; i<logs.size(); i++){
+                MinHeapSort << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
+            }
+        }else if(operation=="10 Most repeated ips"){
+            cout << "10 Most repeated ips:" << endl;
+            for(string ip : ipSet){
+                int count = ipBst.findAndCount(ip);
+                if(count > 1){
+                    ip = "Count: " + to_string(count) + " Ip: " + ip;
+                    mostIps.push_back(ip);
+                }
+            }
 
-    heapSort(logs, "min");
+            heapSort(mostIps, "max");
 
-    // Escribiendo los registros ordenados en el archivo minHeapSort.txt
-    for (int i = 0; i < logs.size(); i++) {
-        MinHeapSort << logs[i].year << " " << logs[i].month << " " << logs[i].day << " " << logs[i].time << " " << logs[i].ip << " " << logs[i].message << endl;
-    }
-
-    
-    //finding most repeated ips
-    for(string ip : ipSet){
-        int count = ipBst.findAndCount(ip);
-        if(count > 1){
-            ip = "Count: " + to_string(count) + " Ip: " + ip;
-            mostIps.push_back(ip);
+            for(int i=0; i<10; i++){
+                cout << mostIps[i] << endl;
+            }
+        }else if(operation=="Find count of ips"){
+            string ip;
+            cout << "Ip: ";
+            cin >> ip;
+            cout << "Count: " << ipBst.findAndCount(ip) << endl;
         }
     }
-
-    heapSort(mostIps, "max");
-
-    for(int i=0; i<10; i++){
-        cout << mostIps[i] << endl;
-    }
-
-    //find count of ips
-    cout << ipBst.findAndCount("10.14.255.107") << endl;
-    cout << ipBst.findAndCount("10.14.255.10712") << endl;
-
-
-    
-
     fileIn.close();
     MaxHeapSort.close();
     MinHeapSort.close();
