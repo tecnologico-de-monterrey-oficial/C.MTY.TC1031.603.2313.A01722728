@@ -6,6 +6,7 @@ using namespace std;
 
 #include "GraphM.h"
 #include "GraphMW.h"
+#include "Graph.h"
 
 
 int main() {
@@ -34,7 +35,7 @@ int main() {
     edges.emplace_back(0,2,9);
     edges.emplace_back(0,3,9);
     edges.emplace_back(1,0,7);
-    edges.emplace_back(2,0,7);
+    edges.emplace_back(2,0,9);
     edges.emplace_back(2,1,5);
     edges.emplace_back(2,6,7);
     edges.emplace_back(3,1,8);
@@ -48,6 +49,20 @@ int main() {
 
     GraphMW<int> graphMW(vertices, edges);
     graphMW.print();
+    
+    cout << endl;
+
+    Graph<int> graph(vertices, edges);
+    graph.print();
+    graph.addVertex(8);
+    graph.addEdge(Edge<int>(8,0,5));
+    graph.addEdge(Edge<int>(0,8,5));
+    graph.print();
+    graph.bfs(0);
+    cout << endl;
+    graph.dfs(0);
+    cout << endl;
+    graph.dijkstra(0);
 
 
 
