@@ -147,33 +147,36 @@ void Graph<T>::bfs(T vertex) {
     // validamos que el vértice de inicio exista
     int vertexIndex = findVertex(vertex);
     if (vertexIndex != -1) {
-        // si existe
-        // creamos una fila de tipo int que va a guardar los índices de los vertices por visitar
-        queue<int> bfsQueue;
-        // creamos una lista de estado inicilizada con la cantidad de vértices en falso
-        vector<int> status(vertices.size(), false);
-        // Agregamos el índice del vértice de inicio a la fila
-        bfsQueue.push(vertexIndex);
-        // Cambiamos su estado a verdadero
+        // Creamos una lista de estados del tamaño de la cantidad de vértices inicializado en falso
+        vector<bool> status(vertices.size(), false);
+        // Creamos una cola para guardar los vértices a visitar
+        queue<T> queue;
+        // Agregamos el vértice de inicio a la cola
+        queue.push(vertex);
+        // Actualizamos el estado del vértice de inicio
         status[vertexIndex] = true;
-        // Mientras la fila no este vacía
-        while (!bfsQueue.empty()) {
-            // recorremos los vecinos del primer elemento de la fila
-            for (auto neighbor : adjacencyList[bfsQueue.front()]) {
-                // Obtenemos el índice del target
-                int targetIndex = findVertex(neighbor.target); 
-                // Validamos si el estado sea falso
-                if (!status[targetIndex]) {
-                    // Lo agregamos a la fila
-                    bfsQueue.push(targetIndex);
-                    // Le cambiamos su estado a verdadero
-                    status[targetIndex] = true;
+        // Iteramos mientras la cola no esté vacía
+        while (!queue.empty()) {
+            // Sacamos el primer elemento de la cola
+            T currentVertex = queue.front();
+            // Imprimimos el vértice
+            cout << currentVertex << " ";
+            // Sacamos el vértice de la cola
+            queue.pop();
+            // Buscamos el índice del vértice
+            int currentVertexIndex = findVertex(currentVertex);
+            // Recorremos todos los vecinos del vértice
+            for (auto neighbor : adjacencyList[currentVertexIndex]) {
+                // Buscamos el índice del vecino
+                int neighborIndex = findVertex(neighbor.target);
+                // Validamos el estado del vecino
+                if (!status[neighborIndex]) {
+                    // Agregamos el vecino a la cola
+                    queue.push(neighbor.target);
+                    // Actualizamos el estado del vecino
+                    status[neighborIndex] = true;
                 }
             }
-            // Imprimimos el primer elemento de la fila
-            cout << bfsQueue.front() << " ";
-            // Sacamos el primer elemento de la fila
-            bfsQueue.pop();
         }
         cout << endl;
     } else {

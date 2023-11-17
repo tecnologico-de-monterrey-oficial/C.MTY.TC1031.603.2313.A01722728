@@ -47,22 +47,25 @@ int main() {
     edges.emplace_back(6,4,3);
     edges.emplace_back(7,5,2);
 
-    GraphMW<int> graphMW(vertices, edges);
-    graphMW.print();
-    
-    cout << endl;
-
     Graph<int> graph(vertices, edges);
     graph.print();
     graph.addVertex(8);
     graph.addEdge(Edge<int>(8,0,5));
     graph.addEdge(Edge<int>(0,8,5));
+    
     graph.print();
-    graph.bfs(0);
+    
+    
+
+
+    graph.removeVertex(1);
+    graph.removeEdge(Edge<int>(2,1,5));
+    graph.print();
+    //graph.bfs(0);
     cout << endl;
-    graph.dfs(0);
+    //graph.dfs(0);
     cout << endl;
-    graph.dijkstra(0);
+    //graph.dijkstra(0);
 
 
 
