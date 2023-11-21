@@ -12,6 +12,10 @@ private:
 public:
     GraphMW();
     GraphMW(vector<T> vertices, vector< Edge<T> > edges);
+    void addVertex(T vertex);
+    void addEdge(Edge<T> egde);
+    void removeVertex(T vertex);
+    void removeEdge(Edge<T> edge);
     void print();
 };
 
@@ -54,6 +58,74 @@ GraphMW<T>::GraphMW(vector<T> vertices, vector< Edge<T> > edges) {
 }
 
 template <class T>
+void GraphMW<T>::addVertex(T vertex) {
+    // Verificamos que el vértice no exista en la lista de vértices
+    if (findVertex(vertex) == -1) {
+        // Agregamos el vértice a la lista de vértices
+        vertices.push_back(vertex);
+        // Agregamos una columna a la matriz
+        for (int i=0; i<matrix.size(); i++) {
+            matrix[i].push_back(0);
+        }
+        // Agregamos un renglón a la matriz
+        vector<int> row(vertices.size(),0);
+        matrix.push_back(row);
+    } else {
+        throw runtime_error("Vertex already exists");
+    }
+    
+}
+
+template <class T>
+void GraphMW<T>::addEdge(Edge<T> edge) {
+    // Encontramos el índice en la lista de vértices del vértice origen
+    int sourceIndex = findVertex(edge.source);
+    // Encontramos el índice en la lista de vértices del vértice destino
+    int targetIndex = findVertex(edge.target);
+    // Actualizamos en verdadero en la matriz en el renglon del indice origen y en la columna del indice destino
+    if (sourceIndex != -1 && targetIndex != -1) {
+        matrix[sourceIndex][targetIndex] = edge.weight;
+    } else {
+        throw runtime_error("Source or target vertex does not exist");
+    }
+    
+}
+
+template <class T>
+void GraphMW<T>::removeVertex( T vertex) {
+    // Encontramos el índice en la lista de vértices del vértice origen
+    int vertexIndex = findVertex(vertex);
+    // Verificamos que el vértice exista en la lista de vértices
+    if (vertexIndex != -1) {
+        // Eliminamos el vértice de la lista de vértices
+        vertices.erase(vertices.begin()+vertexIndex);
+        // Eliminamos el renglón de la matriz
+        matrix.erase(matrix.begin()+vertexIndex);
+        // Eliminamos la columna de la matriz
+        for (int i=0; i<matrix.size(); i++) {
+            matrix[i].erase(matrix[i].begin()+vertexIndex);
+        }
+    } else {
+        throw runtime_error("Vertex does not exist");
+    }
+    
+}
+
+template <class T>
+void GraphMW<T>::removeEdge( Edge<T> edge) {
+    // Encontramos el índice en la lista de vértices del vértice origen
+    int sourceIndex = findVertex(edge.source);
+    // Encontramos el índice en la lista de vértices del vértice destino
+    int targetIndex = findVertex(edge.target);
+    // Actualizamos en verdadero en la matriz en el renglon del indice origen y en la columna del indice destino
+    if (sourceIndex != -1 && targetIndex != -1) {
+        matrix[sourceIndex][targetIndex] = 0;
+    } else {
+        throw runtime_error("Source or target vertex does not exist");
+    }   
+}
+
+template <class T>
 void GraphMW<T>::print() {
     cout << "   ";
     for (auto vertex : vertices) {
@@ -67,6 +139,7 @@ void GraphMW<T>::print() {
         }
         cout << endl;
     }
+    cout << endl;
 }
 
 
