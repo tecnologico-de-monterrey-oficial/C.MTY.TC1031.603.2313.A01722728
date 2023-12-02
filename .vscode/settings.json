@@ -10,6 +10,7 @@
         "iosfwd": "cpp",
         "xiosbase": "cpp",
         "initializer_list": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "typeinfo": "cpp"
     }
 }

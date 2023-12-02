@@ -17,16 +17,17 @@ public:
 };
 
 HashStudentId::HashStudentId() {
-    table.resize(11);
-    status.resize(11, false);
+    table.resize(50);
+    status.resize(50, false);
 }
 
 int HashStudentId::hash(string studentId) {
     // Desarrollar la función hash
-    return stoi(studentId) % 11;
+    return stoi(studentId) % 38;
 }
 
 int HashStudentId::findStudentId(string studentId) {
+    studentId = studentId.substr(1);
     // Obtengo el índice de la función de hashing
     int index = hash(studentId);
     if (table[index] == studentId) {
@@ -50,6 +51,7 @@ int HashStudentId::findStudentId(string studentId) {
 }
 
 void HashStudentId::insert(string studentId) {
+    studentId = studentId.substr(1);
     // Validar si existe el elemento
     if (findStudentId(studentId) == -1) {
         // Obtengo el índice de la función de hashing
@@ -85,6 +87,7 @@ void HashStudentId::insert(string studentId) {
 }
 
 void HashStudentId::remove(string studentId) {
+    studentId = studentId.substr(1);
     // Buscamos el índice donde se encuentra el valor a borrar
     int index = findStudentId(studentId);
     // Validamos si lo encontramos
@@ -100,7 +103,7 @@ void HashStudentId::remove(string studentId) {
 
 void HashStudentId::print() {
     for (int i=0; i<table.size(); i++) {
-        cout << i << "-" << table[i] << " ";
+        cout << i << "-A" << table[i] << " ";
     }
     cout << endl;
 }

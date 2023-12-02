@@ -1,10 +1,24 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 #include "HashMatricula.h"
 
 int main() {
+    ifstream fileIn("matriculas.txt");
+
+    string line;
+    string studentId;
+    HashStudentId hashTable;
+
+    while(getline(fileIn, line)){
+        stringstream ss(line);
+        getline(ss, studentId);
+        hashTable.insert(studentId);
+    }
+
 
     vector<string> menu{
         "insert",
@@ -16,7 +30,7 @@ int main() {
     int option = 0;
     string operation = "";
 
-    HashStudentId hashTable;
+    //HashStudentId hashTable;
 
     while(operation!="exit"){
         cout << "Select an option:" << endl;
