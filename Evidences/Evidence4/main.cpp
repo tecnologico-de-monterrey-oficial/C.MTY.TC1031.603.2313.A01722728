@@ -80,11 +80,13 @@ int main(){
         if(operation == "sort_cities"){
             vector<string> unique_cities_vector(unique_cities.begin(), unique_cities.end());
             quickSort(unique_cities_vector, 0, unique_cities_vector.size()-1);
+            sorted_cites_file << "Sorted cities:" << endl;
             for(int i = 0; i < unique_cities_vector.size(); i++){
                 sorted_cites_file << unique_cities_vector[i] << endl;
             }
         }else if(operation == "adjacency_lists"){
             //ajacency list for train in output603-2-train.out
+            adjacency_list_file_train << "Adjacency list for train:" << endl;
             for (int i=0; i<train_graph.vertices.size(); i++) {
                 adjacency_list_file_train << train_graph.vertices[i] << " - ";
                 for (auto edge : train_graph.adjacencyList[i]) {
@@ -93,6 +95,7 @@ int main(){
                 adjacency_list_file_train << endl;
             }
             //ajacency list for car in output603-2-car.out
+            adjacency_list_file_car << "Adjacency list for car:" << endl;
             for (int i=0; i<car_graph.vertices.size(); i++) {
                 adjacency_list_file_car << car_graph.vertices[i] << " - ";
                 for (auto edge : car_graph.adjacencyList[i]) {
@@ -108,6 +111,7 @@ int main(){
             try{
                 train_graph.bfs(start_city);
                 //print elements of bfs_result_vector
+                bfs_file << "BFS traversal starting from " << start_city << ":" << endl;
                 for(int i = 0; i < train_graph.bfs_result_vector.size(); i++){
                     bfs_file << train_graph.bfs_result_vector[i] << endl;
                 }    
@@ -118,6 +122,7 @@ int main(){
             try{
                 train_graph.dfs(start_city);
                 //print elements of dfs_result_vector
+                dfs_file << "DFS traversal starting from " << start_city << ":" << endl;
                 for(int i = 0; i < train_graph.dfs_result_vector.size(); i++){
                     dfs_file << train_graph.dfs_result_vector[i] << endl;
                 }
@@ -126,8 +131,8 @@ int main(){
             }
 
             
-            
         }else if(operation == "dijkstra"){
+            
         }
 
     }

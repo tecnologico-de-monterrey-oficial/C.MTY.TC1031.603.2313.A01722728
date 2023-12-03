@@ -2,6 +2,7 @@
 #define Graph_h
 
 #include "Edge.h"
+#include "HashStudentId.h"
 #include <queue>
 #include <stack>
 

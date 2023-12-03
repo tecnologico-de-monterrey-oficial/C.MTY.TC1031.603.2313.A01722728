@@ -59,42 +59,7 @@ int main(){
 
     }
 
-    vector<string> unique_cities_vector(unique_cities.begin(), unique_cities.end());
-
-    quickSort(unique_cities_vector, 0, unique_cities_vector.size()-1);
-    for(int i = 0; i < unique_cities_vector.size(); i++){
-        sorted_cites_file << unique_cities_vector[i] << endl;
-    }
-
-    for (int i=0; i<train_graph.vertices.size(); i++) {
-        adjacency_list_file_train << train_graph.vertices[i] << " - ";
-        for (auto edge : train_graph.adjacencyList[i]) {
-            adjacency_list_file_train << edge.target << " " << edge.weight << " - " << edge.time << " | ";
-        }
-        adjacency_list_file_train << endl;
-    }
-
-    //ajacency list for car in output603-2-car.out
-    for (int i=0; i<car_graph.vertices.size(); i++) {
-        adjacency_list_file_car << car_graph.vertices[i] << " - ";
-        for (auto edge : car_graph.adjacencyList[i]) {
-            adjacency_list_file_car << edge.target << " " << edge.weight << " - " << edge.time << " | ";
-        }
-        adjacency_list_file_car << endl;
-    }
-
-
-    train_graph.bfs("London");
-    //print elements of bfs_result_vector
-    for(int i = 0; i < train_graph.bfs_result_vector.size(); i++){
-        bfs_file << train_graph.bfs_result_vector[i] << endl;
-    }    
-    train_graph.dfs("London");
-
-    //print elements of dfs_result_vector
-    for(int i = 0; i < train_graph.dfs_result_vector.size(); i++){
-        dfs_file << train_graph.dfs_result_vector[i] << endl;
-    }
+    
 
     return 0;
 }
