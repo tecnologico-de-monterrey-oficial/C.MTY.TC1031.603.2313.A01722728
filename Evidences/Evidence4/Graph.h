@@ -23,7 +23,7 @@ public:
     void removeEdge(Edge<T> edge);
     void bfs(T vertex);
     void dfs(T vertex);
-    void dijkstra(T vertex);
+    void dijkstra(T vertex, T vertex2);
     void print();
 
     vector<T> bfs_result_vector;
@@ -248,7 +248,7 @@ int Graph<T>::findShortest(vector<bool> &status, vector<int> &cost) {
 }
 
 template <class T>
-void Graph<T>::dijkstra(T vertex) {
+void Graph<T>::dijkstra(T vertex, T vertex2) {
     // Validamos que el vértice de parámetro exista
     int vertexIndex = findVertex(vertex);
     if (vertexIndex != -1) {
