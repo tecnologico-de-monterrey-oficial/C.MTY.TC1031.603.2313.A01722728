@@ -132,7 +132,25 @@ int main(){
 
             
         }else if(operation == "dijkstra"){
-            
+            string start_city;
+            string end_city;
+            cout << "Enter a city to start the traversal: ";
+            cin >> start_city;
+            cout << "Enter a city to end the traversal: ";
+            cin >> end_city;
+            cout << "Tren - ";
+            try{
+                train_graph.dijkstra(start_city, end_city);
+            }catch(exception& e){
+                cout << e.what() << endl;
+            }
+            cout << "Carro - ";
+            try{
+                car_graph.dijkstra(start_city, end_city);
+            }catch(exception& e){
+                cout << e.what() << endl;
+            }
+
         }
 
     }

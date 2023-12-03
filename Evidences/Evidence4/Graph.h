@@ -284,45 +284,8 @@ void Graph<T>::dijkstra(T vertex, T vertex2) {
             // Actualizamos el valor de shortest Index
             shortestIndex = findShortest(status, cost);
         }
-        // Seguimos con el proceso de actualizar la lista de pilas
-        // Incializamos una lista de pilas vacías
-        vector< stack<int> > shortestPaths(vertices.size());
-        // Recorremos todos los vértices
-        for (int i=0; i<vertices.size(); i++) {
-            // Valdamos que el costo no sea infinito
-            if (cost[i] != INT_MAX) { 
-                // Agregamos la pila del vértice actual su índice
-                shortestPaths[i].push(i);
-                // Creamos ubna variable para guardar el índice del path
-                int pathIndex = path[i];
-                // Iteramos mientras pathIndex sea diferente de -1
-                while (pathIndex != -1) {
-                    // Agregamos el path index a la pila
-                    shortestPaths[i].push(pathIndex);   
-                    // Actualizamos el path index con el valor del path de path index
-                    pathIndex = path[pathIndex];
-                }
-            }
-        }
-        // Imprimimos el resultado
-        // Iteramos todos los vértices
-        for (int i=0; i<vertices.size(); i++) {
-            cout << vertices[i] << " -> ";
-            // Valid[amos que la pila no sea vacía o que el costo no sea infinito
-            if (cost[i] != INT_MAX) {
-                // Iteramos mientas la pila no sea vacía
-                while (!shortestPaths[i].empty()) {
-                    // Imprimimos el primer elemento de la pila
-                    cout << shortestPaths[i].top() << " ";
-                    // Sacamos el primer elemento de la pila
-                    shortestPaths[i].pop();
-                }
-                // Imprimimos el peso
-                cout << "- " << cost[i] << endl;
-            } else {
-                cout << "No hay ruta" << endl;
-            }
-        }
+        int vertex2Index = findVertex(vertex2);
+        cout << "Distancia mas corta: " << cost[vertex2Index] << " km"<< endl;
     } else {
         throw invalid_argument("El vértice no existe");
     }
