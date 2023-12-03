@@ -8,12 +8,12 @@
 template <class T>
 class Graph {
 private:
-    vector<T> vertices;
-    vector< vector< Edge<T> > > adjacencyList;
     int findVertex(T vertex);
     void dfsr(T vertex, vector<bool> &status);
     int findShortest(vector<bool> &status, vector<int> &cost);
 public:
+    vector<T> vertices;
+    vector< vector< Edge<T> > > adjacencyList;
     Graph();
     Graph(vector<T> vertices, vector< Edge<T> > edges);
     void addVertex(T vertex);
@@ -24,6 +24,9 @@ public:
     void dfs(T vertex);
     void dijkstra(T vertex);
     void print();
+
+    vector<T> bfs_result_vector;
+    vector<T> dfs_result_vector;
 };
 
 template <class T>
@@ -72,9 +75,8 @@ void Graph<T>::addVertex(T vertex) {
         // Agregarlo a la lista de adyacencias
         vector< Edge<T> > emptyEdges;
         adjacencyList.push_back(emptyEdges);
-    } else {
-        throw invalid_argument("Vértice ya existe");
-    }
+    } 
+    //else {throw invalid_argument("Vértice ya existe"); }
 }
 
 template <class T>
@@ -144,6 +146,7 @@ void Graph<T>::removeEdge(Edge<T> edge) {
 
 template <class T>
 void Graph<T>::bfs(T vertex) {
+    bfs_result_vector.clear();
     // validamos que el vértice de inicio exista
     int vertexIndex = findVertex(vertex);
     if (vertexIndex != -1) {
@@ -160,7 +163,8 @@ void Graph<T>::bfs(T vertex) {
             // Sacamos el primer elemento de la cola
             T currentVertex = queue.front();
             // Imprimimos el vértice
-            cout << currentVertex << " ";
+            bfs_result_vector.push_back(currentVertex);
+            //cout << currentVertex << " ";
             // Sacamos el vértice de la cola
             queue.pop();
             // Buscamos el índice del vértice
@@ -178,7 +182,7 @@ void Graph<T>::bfs(T vertex) {
                 }
             }
         }
-        cout << endl;
+        //cout << endl;
     } else {
         throw invalid_argument("El vértice no existe");
     }
@@ -187,7 +191,8 @@ void Graph<T>::bfs(T vertex) {
 template <class T>
 void Graph<T>::dfsr(T vertex, vector<bool> &status) {
     // Visitamos el vértice
-    cout << vertex << " ";
+    dfs_result_vector.push_back(vertex);
+    //cout << vertex << " ";
     // Buscamos el índice del vértice
     int vertexIndex = findVertex(vertex);
     // Actualizamos su estado
@@ -206,6 +211,7 @@ void Graph<T>::dfsr(T vertex, vector<bool> &status) {
 
 template <class T>
 void Graph<T>::dfs(T vertex) {
+    dfs_result_vector.clear();
     // Validamos si el vértice existe
     int vertexIndex = findVertex(vertex);
     if (vertexIndex != -1) {

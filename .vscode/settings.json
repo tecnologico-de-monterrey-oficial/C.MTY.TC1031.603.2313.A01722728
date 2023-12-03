@@ -11,6 +11,7 @@
         "xiosbase": "cpp",
         "initializer_list": "cpp",
         "ostream": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "sstream": "cpp"
     }
 }
